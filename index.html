@@ -43,7 +43,7 @@ input:focus,select:focus{outline:none;border-color:#007aff;border-width:2px}
 .rec-del{background:none;border:none;color:#c7c7cc;cursor:pointer;padding:6px;font-size:20px;line-height:1}
 .empty{text-align:center;padding:60px 16px;color:#8e8e93;font-size:15px}
 .empty-icon{font-size:52px;display:block;margin-bottom:12px}
-.nav{display:flex;border-top:1px solid #e5e5ea;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.95);max-width:430px;margin:0 auto;padding-bottom:env(safe-area-inset-bottom,0px);backdrop-filter:blur(10px)}
+.nav{display:flex;border-top:1px solid #e5e5ea;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.95);max-width:430px;margin:0 auto;padding-bottom:env(safe-area-inset-bottom,0px)}
 .nbtn{flex:1;padding:8px 0 5px;text-align:center;cursor:pointer;font-size:10px;color:#8e8e93;font-weight:500}
 .nbtn.on{color:#007aff}
 .nbtn-icon{font-size:22px;display:block;line-height:1.3}
@@ -71,14 +71,14 @@ input:focus,select:focus{outline:none;border-color:#007aff;border-width:2px}
   <div class="section">
     <div class="card">
       <div class="type-toggle">
-        <div class="tbtn tin" id="btn-in" onclick="setType(&#39;income&#39;)">📈 收入</div>
-        <div class="tbtn" id="btn-out" onclick="setType(&#39;expense&#39;)">💸 支出</div>
+        <div class="tbtn tin" id="btn-in" onclick="setType('income')">📈 收入</div>
+        <div class="tbtn" id="btn-out" onclick="setType('expense')">💸 支出</div>
       </div>
       <div class="form-row">
         <div><label>日期</label><input type="date" id="inp-date"></div>
         <div><label>金额（元）</label><input type="number" id="inp-amt" placeholder="0.00" step="0.01" min="0" inputmode="decimal"></div>
       </div>
-      <div class="form-full"><label>说明</label><input type="text" id="inp-desc" placeholder="例：卖掉天娱数科"></div>
+      <div class="form-full"><label>��明</label><input type="text" id="inp-desc" placeholder="例：卖掉天娱数科"></div>
       <div class="form-full"><label>分类</label>
         <select id="inp-cat">
           <option value="股票">📈 股票</option>
@@ -106,9 +106,9 @@ input:focus,select:focus{outline:none;border-color:#007aff;border-width:2px}
 </div>
 
 <div class="nav">
-  <div class="nbtn on" id="nav-list" onclick="go(&#39;list&#39;)"><span class="nbtn-icon">📋</span>明细</div>
-  <div class="nbtn" id="nav-add" onclick="go(&#39;add&#39;)"><span class="nbtn-icon">➕</span>记账</div>
-  <div class="nbtn" id="nav-stats" onclick="go(&#39;stats&#39;)"><span class="nbtn-icon">📊</span>统计</div>
+  <div class="nbtn on" id="nav-list" onclick="go('list')"><span class="nbtn-icon">📋</span>明细</div>
+  <div class="nbtn" id="nav-add" onclick="go('add')"><span class="nbtn-icon">➕</span>记账</div>
+  <div class="nbtn" id="nav-stats" onclick="go('stats')"><span class="nbtn-icon">📊</span>统计</div>
 </div>
 
 <script>
@@ -199,14 +199,14 @@ function renderStats(){
   body.innerHTML=
     '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">'+
     '<div class="stat"><div class="stat-label">收入</div><div class="stat-val iv">'+fmt(tIn)+'</div></div>'+
-    '<div class="stat"><div class="stat-label">支出</div><div class="stat-val ev">'+fmt(tOut)+'</div></div>'+
+    '<div class="stat"><div class="stat-label">支��</div><div class="stat-val ev">'+fmt(tOut)+'</div></div>'+
     '<div class="stat"><div class="stat-label">结余</div><div class="stat-val '+(net>=0?'np':'nn')+'">'+fmt(net)+'</div></div></div>'+
     (iItems.length?'<div class="stats-card"><div class="stitle">📈 收入分类</div>'+
-      iItems.map(function(e){return '<div class="cat-row"><span>'+e[0]+'</span><span style="color:#34c759;font-weight:700">+'+fmt(e[1])+'</span></div>'+
-        '<div class="bar-bg"><div class="bar" style="width:'+Math.round(e[1]/maxI*100)+'%;background:#34c759"></div></div>';}).join('')+'</div>':'')+
+      iItems.map(function(e){return '<div><div class="cat-row"><span>'+e[0]+'</span><span style="color:#34c759;font-weight:700">+'+fmt(e[1])+'</span></div>'+
+        '<div class="bar-bg"><div class="bar" style="width:'+Math.round(e[1]/maxI*100)+'%;background:#34c759"></div></div></div>';}).join('')+'</div>':'')+
     (oItems.length?'<div class="stats-card"><div class="stitle">💸 支出分类</div>'+
-      oItems.map(function(e){return '<div class="cat-row"><span>'+e[0]+'</span><span style="color:#ff3b30;font-weight:700">-'+fmt(e[1])+'</span></div>'+
-        '<div class="bar-bg"><div class="bar" style="width:'+Math.round(e[1]/maxO*100)+'%;background:#ff3b30"></div></div>';}).join('')+'</div>':'');
+      oItems.map(function(e){return '<div><div class="cat-row"><span>'+e[0]+'</span><span style="color:#ff3b30;font-weight:700">-'+fmt(e[1])+'</span></div>'+
+        '<div class="bar-bg"><div class="bar" style="width:'+Math.round(e[1]/maxO*100)+'%;background:#ff3b30"></div></div></div>';}).join('')+'</div>':'');
 }
 
 render();go('list');
